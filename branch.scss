@@ -4,17 +4,13 @@
 }
 
 .branch {
-  margin: 10em auto;
+  margin: 150px auto 200px;
   // set dimensions & border crap
   width: 51px;
   height: 51px;
   @include border-radius(26px);
   position: relative;
-  opacity: 0.8;
   // ooh pretty hover
-  &:hover {
-    opacity: 1; cursor: pointer; 
-  }
 
   // set the background color for type of "branch"
   &.branch--sass {
@@ -34,15 +30,15 @@
 .branch__arm {
   width: 180px;
   height: 32px;
-  display: none;
-  opacity: 1;
+
   .arm__circle {
     width: 32px;
     height: 32px;
-    background-color: #000;
+    background-color: #333;
     @include border-radius(32px);
     border: 2px solid transparent;
-    
+    opacity: 0;
+
     &:hover {
       border: 2px solid #777;
     }
@@ -64,13 +60,18 @@
     $degree: 0deg;
 
     @while $armNumber <= $arms {
+      $animationDelay: $armNumber * 0.1s;
+
       .arm--#{$armNumber} {
         position: absolute;
         top: 10px;
-        left: -60px;
+        left: -$arms + -60px; // position hacking fml
         -webkit-transform:rotate($degree);
         .arm__circle {
           -webkit-transform:rotate(-$degree);
+          -webkit-animation: arms 1s ease-in;
+          -webkit-animation-delay: $animationDelay;
+          -webkit-animation-fill-mode:forwards;
         }
       }
 
@@ -78,4 +79,11 @@
       $degree: ($armNumber - 1) * $theta;
     }
   }
+
 }
+
+@-webkit-keyframes arms {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
