@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>sup bruhs</title>
+    <link rel="stylesheet" href="mixins.css">
+    <link rel="stylesheet" href="branch.css">  
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="branch.js"></script>
+  </head>
+
+  <body>
+
+    <div class="branch branch--sass" data-arms="6">
+      <span class="branch__label">S</span>
+      <div class="branch__arm arm--1"><div class="arm__circle"><span class="arm__label">1</span></div></div>
+      <div class="branch__arm arm--2"><div class="arm__circle"><span class="arm__label">2</span></div></div>
+      <div class="branch__arm arm--3"><div class="arm__circle"><span class="arm__label">3</span></div></div>
+      <div class="branch__arm arm--4"><div class="arm__circle"><span class="arm__label">4</span></div></div>
+      <div class="branch__arm arm--5"><div class="arm__circle"><span class="arm__label">5</span></div></div>
+      <div class="branch__arm arm--6"><div class="arm__circle"><span class="arm__label">6</span></div></div>
+    </div>
+    
+    <script type="text/javascript">
+      $(function(){
+        $('.branch').hover(function(){
+          $('.branch__arm').show();
+        });
+      })
+    </script>
+
+  </body>
+
+</html>

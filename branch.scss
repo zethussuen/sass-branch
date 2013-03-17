@@ -1,0 +1,81 @@
+/// GENERIC MIXINS
+@mixin border-radius($radius: 0px) {
+  border-radius: $radius;
+}
+
+.branch {
+  margin: 10em auto;
+  // set dimensions & border crap
+  width: 51px;
+  height: 51px;
+  @include border-radius(26px);
+  position: relative;
+  opacity: 0.8;
+  // ooh pretty hover
+  &:hover {
+    opacity: 1; cursor: pointer; 
+  }
+
+  // set the background color for type of "branch"
+  &.branch--sass {
+    background-color: #ce4dd6;
+    color: #fff;
+  }
+  // and the label of the branch "S for Sass"
+  .branch__label {
+    display: block;
+    text-align: center;
+    font-size: 2em;
+    padding-top: 0.24em;
+  }
+}
+
+// the actual arms!
+.branch__arm {
+  width: 180px;
+  height: 32px;
+  display: none;
+  opacity: 1;
+  .arm__circle {
+    width: 32px;
+    height: 32px;
+    background-color: #000;
+    @include border-radius(32px);
+    border: 2px solid transparent;
+    
+    &:hover {
+      border: 2px solid #777;
+    }
+  }
+
+  .arm__label {
+    display: block;
+    padding-top: 0.45em;
+    text-align: center;
+    color: #fff;
+  }
+}
+
+@for $arms from 1 through 6 {
+  
+  .branch[data-arms="#{$arms}"]  {
+    $armNumber: 1;
+    $theta: 360deg/$arms;
+    $degree: 0deg;
+
+    @while $armNumber <= $arms {
+      .arm--#{$armNumber} {
+        position: absolute;
+        top: 10px;
+        left: -60px;
+        -webkit-transform:rotate($degree);
+        .arm__circle {
+          -webkit-transform:rotate(-$degree);
+        }
+      }
+
+      $armNumber: $armNumber + 1;
+      $degree: ($armNumber - 1) * $theta;
+    }
+  }
+}
